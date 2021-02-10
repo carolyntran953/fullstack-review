@@ -8,8 +8,8 @@ let getReposByUsername = (user) => {
   // The options object has been provided to help you out,
   // but you'll have to fill in the URL
   let options = {
-    // url: 'FILL ME IN',
-    url: 'https://api.github.com',
+    // url: 'https://api.github.com',
+    baseUrl: 'https://api.github.com',
     headers: {
       'User-Agent': 'request',
       'Authorization': `token ${config.TOKEN}`
@@ -17,7 +17,8 @@ let getReposByUsername = (user) => {
   };
 
   return axios.get(`/users/${user}/repos`, options)
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((err) => console.log('getReposByUserName: ' + err));
 }
 
 module.exports.getReposByUsername = getReposByUsername;

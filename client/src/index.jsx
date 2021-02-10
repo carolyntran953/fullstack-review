@@ -13,24 +13,23 @@ class App extends React.Component {
 
   }
 
-  componentDidMount() {
-    fetch('/repos')
-      .then(res => 'ADD SOMETHING HERE!!!')
-      .then((result) => {
-        this.setState({
-          repos: result
-        });
-      },
-      (error) => {
-        this.setState({
-          error
-        });
-      })
-  }
-
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
+    $.ajax({
+      url: '/repos',
+      method: 'POST',
+      data: { owner: term },
+      success: (data) => {
+        console.log('post request success');
+        this.setState({
+          repos: data.repos
+        });
+      },
+      error: (err) => {
+        console.log('search: ' + err);
+        return;
+      }
+    });
   }
 
   render () {

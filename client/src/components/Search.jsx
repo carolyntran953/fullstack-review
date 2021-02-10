@@ -9,15 +9,15 @@ class Search extends React.Component {
   }
 
   onChange (e) {
-    console.log('onChange working');
-    console.log(this.state.term);
+    // console.log('onChange working');
+    // console.log(this.state.term);
     this.setState({
       term: e.target.value
     });
   }
 
   search() {
-    console.log('term: ' + this.state.term);
+    // console.log('term: ' + this.state.term);
     this.props.onSearch(this.state.term);
   }
 

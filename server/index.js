@@ -1,7 +1,7 @@
 const express = require('express');
 let app = express();
-// import getReposByUsername from 'helpers/github.js';
-// import save from '../database/index.js';
+// const getReposByUsername = require('helpers/github.js');
+// const save = require ('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
