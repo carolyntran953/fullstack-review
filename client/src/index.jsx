@@ -18,15 +18,15 @@ class App extends React.Component {
     $.ajax({
       url: '/repos',
       method: 'POST',
-      data: { owner: term },
-      success: (data) => {
+      data: term,
+      success: (result) => {
         console.log('post request success');
         this.setState({
-          repos: data.repos
+          repos: result.repos
         });
       },
       error: (err) => {
-        console.log('search: ' + err);
+        console.log('search error: ' + JSON.stringify(err));
         return;
       }
     });
