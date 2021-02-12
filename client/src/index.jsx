@@ -18,7 +18,7 @@ class App extends React.Component {
     $.ajax({
       url: '/repos',
       method: 'POST',
-      data: term,
+      data: { user: term },
       success: (result) => {
         console.log('post request success');
         this.setState({
@@ -26,7 +26,7 @@ class App extends React.Component {
         });
       },
       error: (err) => {
-        console.log('search error: ' + JSON.stringify(err));
+        console.log('search error: ' + err);
         return;
       }
     });

@@ -12,17 +12,17 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (/* TODO */) => {
+let save = (repos) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
   let repo = new Repo();
-  repo.id = req.body.id;
-  repo.owner = req.body.owner.login;
-  repo.name = req.body.name;
-  repo.description = req.body.description;
-  repo.url = req.body.url;
-  repo.stars = req.body.stargazers_count;
+  repo.id = repos.id;
+  repo.owner = repos.owner.login;
+  repo.name = repos.name;
+  repo.description = repos.description;
+  repo.url = repos.url;
+  repo.stars = repos.stargazers_count;
   repo.save = (err, result) => {
     if (err) {
       console.log('save error: ' + err);
