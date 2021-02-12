@@ -23,13 +23,14 @@ let save = (repos) => {
   repo.description = repos.description;
   repo.url = repos.url;
   repo.stars = repos.stargazers_count;
-  repo.save = (err, result) => {
+
+  repo.save(repo, (err, result) => {
     if (err) {
       console.log('save error: ' + err);
     } else {
       console.log('save result: ' + result);
     }
-  }
+  });
 }
 
 module.exports.save = save;

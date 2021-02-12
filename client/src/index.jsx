@@ -37,6 +37,21 @@ class App extends React.Component {
       <h1>Github Fetcher</h1>
       <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>OWNER</th>
+          <th>NAME</th>
+          <th>DESCRIPTION</th>
+          <th>URL</th>
+          <th>#STARS</th>
+          <tbody>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+        </tr>
+      </table>
     </div>)
   }
 }
