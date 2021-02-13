@@ -3,6 +3,8 @@ let app = express();
 const bodyParser = require('body-parser');
 const { getReposByUsername } = require('../helpers/github.js');
 const { save } = require ('../database/index.js');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/fetcher');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
@@ -15,7 +17,6 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   getReposByUsername(req.body.user)
   .then((repos) => {
-    // console.log('repo: ' + JSON.stringify(repos[0]));
     repos.forEach(repo => save(repo));
     res.send(repos);
   }).catch((err) => {
@@ -26,6 +27,22 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  mongoose.connection.collection('repos').find({}).limit(25).sort({'stars': -1}).toArray()
+  .then((docs) => {
+    console.log(docs);
+  })
+  .catch(console.error);
+
+  // mongoose.connection.collection('repos').find({}).limit(25).sort().exec((err, docs) => {
+  //   if (err) {
+  //     console.log(`get top repos error: ` + err)
+  //   }
+  //   res.send(docs);
+  // });
+  // mongoose.connection.collection('repos').find({}).limit(25).sort({'stars': -1})
+  // .then((docs) => res.send(docs))
+  // .catch((err) => console.log(`get top repos error: ` + err));
+  res.end();
 });
 
 let port = 1128;

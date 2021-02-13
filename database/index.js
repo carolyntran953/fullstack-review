@@ -7,7 +7,7 @@ let repoSchema = mongoose.Schema({
   name: String,
   description: String,
   url: String,
-  stargazers_count: Number
+  stars: Number
 });
 
 let Repo = mongoose.model('Repo', repoSchema);
@@ -23,6 +23,8 @@ let save = (repos) => {
   repo.description = repos.description;
   repo.url = repos.url;
   repo.stars = repos.stargazers_count;
+
+  mongoose.connection.collection('repos').createIndex({'id': 1}, {unique: true});
 
   mongoose.connection.collection('repos').insert(repo);
 }

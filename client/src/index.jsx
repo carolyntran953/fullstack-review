@@ -20,7 +20,6 @@ class App extends React.Component {
       method: 'POST',
       data: { user: term },
       success: (result) => {
-        console.log('post request success');
         this.setState({
           repos: result.repos
         });
@@ -44,7 +43,7 @@ class App extends React.Component {
           <th>REPOSITORY</th>
           <th>DESCRIPTION</th>
           <th>URL</th>
-          <th>#STARS</th>
+          <th>STARS</th>
           </tr>
         </thead>
         <tbody>
