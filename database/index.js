@@ -24,14 +24,7 @@ let save = (repos) => {
   repo.url = repos.url;
   repo.stars = repos.stargazers_count;
 
-  // repo.save = (err, result) => {
-  //   if (err) {
-  //     console.log('save error: ' + err);
-  //   } else {
-  //     console.log('save result: ' + result);
-  //   }
-  // }
-  db.repos.insert(repo);
+  mongoose.connection.collection('repos').insert(repo);
 }
 
 module.exports.save = save;
