@@ -38,20 +38,26 @@ class App extends React.Component {
       <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
       <table>
-        <tr>
-          <th>ID</th>
-          <th>OWNER</th>
-          <th>NAME</th>
+        <thead>
+          <tr>
+          <th>USER</th>
+          <th>REPOSITORY</th>
           <th>DESCRIPTION</th>
           <th>URL</th>
           <th>#STARS</th>
-          <tbody>
-            <tr>
-              <td></td>
-            </tr>
-          </tbody>
-        </tr>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>placeholder user</td>
+            <td>placeholder repo</td>
+            <td>placeholder desc</td>
+            <td>placeholder url</td>
+            <td>placeholder stars</td>
+          </tr>
+        </tbody>
       </table>
+      <p>{`test: ${this.state.repos}`}</p>
     </div>)
   }
 }
