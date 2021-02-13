@@ -24,7 +24,7 @@ let save = (repos) => {
   repo.url = repos.url;
   repo.stars = repos.stargazers_count;
 
-  mongoose.connection.collection('repos').createIndex({'id': 1}, {unique: true});
+  // mongoose.connection.collection('repos').createIndex({id: 1}, {unique: true, sparse:true});
 
   mongoose.connection.collection('repos').insert(repo);
 }

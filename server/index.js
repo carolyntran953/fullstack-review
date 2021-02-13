@@ -29,19 +29,10 @@ app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos
   mongoose.connection.collection('repos').find({}).limit(25).sort({'stars': -1}).toArray()
   .then((docs) => {
-    console.log(docs);
+    res.send(docs);
   })
   .catch(console.error);
 
-  // mongoose.connection.collection('repos').find({}).limit(25).sort().exec((err, docs) => {
-  //   if (err) {
-  //     console.log(`get top repos error: ` + err)
-  //   }
-  //   res.send(docs);
-  // });
-  // mongoose.connection.collection('repos').find({}).limit(25).sort({'stars': -1})
-  // .then((docs) => res.send(docs))
-  // .catch((err) => console.log(`get top repos error: ` + err));
   res.end();
 });
 
