@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
   id: Number,
-  owner: String,
+  user: String,
   name: String,
   description: String,
   url: String,
@@ -18,7 +18,7 @@ let save = (repos) => {
   // the MongoDB
   let repo = new Repo();
   repo.id = repos.id;
-  repo.owner = repos.owner.login;
+  repo.user = repos.owner.login;
   repo.name = repos.name;
   repo.description = repos.description;
   repo.url = repos.url;

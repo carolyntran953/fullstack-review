@@ -15,12 +15,18 @@ app.post('/repos', function (req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
+  console.log('user: ' + req.body.user);
   getReposByUsername(req.body.user)
   .then((repos) => {
-    repos.forEach(repo => save(repo));
+    // console.log(repos);
+    repos.forEach(repo => {
+      save(repo)
+    });
     res.send(repos);
-  }).catch((err) => {
-    console.log('save error in server: ' + err)
+  })
+  .catch((err) => {
+    console.log('save error in server: ' + err);
+    // res.sendStatus(404);
   });
 });
 
@@ -29,9 +35,12 @@ app.get('/repos', function (req, res) {
   // This route should send back the top 25 repos
   mongoose.connection.collection('repos').find({}).limit(25).sort({'stars': -1}).toArray()
   .then((docs) => {
+    console.log(docs);
     res.send(docs);
   })
-  .catch(console.error);
+  .catch((err) => {
+    console.log('get top repos: ' + err);
+  });
 
   res.end();
 });

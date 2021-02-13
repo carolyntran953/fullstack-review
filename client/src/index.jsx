@@ -21,8 +21,9 @@ class App extends React.Component {
       data: { user: term },
       success: (result) => {
         this.setState({
-          repos: result.repos
+          repos: result
         });
+        console.log('search success');
       },
       error: (err) => {
         console.log('search error: ' + err);
@@ -34,29 +35,8 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
-      <table>
-        <thead>
-          <tr>
-          <th>USER</th>
-          <th>REPOSITORY</th>
-          <th>DESCRIPTION</th>
-          <th>URL</th>
-          <th>STARS</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>placeholder user</td>
-            <td>placeholder repo</td>
-            <td>placeholder desc</td>
-            <td>placeholder url</td>
-            <td>placeholder stars</td>
-          </tr>
-        </tbody>
-      </table>
-      <p>{`test: ${this.state.repos}`}</p>
+      <RepoList repos={this.state.repos}/>
     </div>)
   }
 }
