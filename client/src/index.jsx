@@ -21,7 +21,8 @@ class App extends React.Component {
       data: { user: term },
       success: (result) => {
         this.setState({
-          repos: result
+          // repos: result
+          repos: [...this.state.repos, ...result]
         });
         console.log('search success');
       },

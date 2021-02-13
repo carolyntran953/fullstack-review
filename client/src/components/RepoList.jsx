@@ -1,4 +1,5 @@
 import React from 'react';
+import Repo from './Repo.jsx';
 
 const RepoList = (props) => (
   <div>
@@ -7,6 +8,7 @@ const RepoList = (props) => (
     <table>
       <thead>
         <tr>
+        <th>RANK</th>
         <th>USER</th>
         <th>REPOSITORY</th>
         <th>DESCRIPTION</th>
@@ -15,9 +17,7 @@ const RepoList = (props) => (
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{props.repos.id}</td>
-        </tr>
+        {props.repos.map(repo => <Repo key={repo.id} repo={repo} />)}
       </tbody>
     </table>
   </div>
