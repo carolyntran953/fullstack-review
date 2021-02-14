@@ -12,7 +12,6 @@ const RepoList = (props) => (
         <th>USER</th>
         <th>REPOSITORY</th>
         <th>DESCRIPTION</th>
-        <th>URL</th>
         <th>STARS</th>
         </tr>
       </thead>
