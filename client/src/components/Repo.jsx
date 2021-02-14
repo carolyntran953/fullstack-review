@@ -2,7 +2,7 @@ import React from 'react';
 
 const Repo = (props) => (
   <tr>
-    <td>add rank</td>
+    <td>{props.repo.rank}</td>
     <td>{props.repo.owner.login}</td>
     <td>{props.repo.name}</td>
     <td>{props.repo.description}</td>

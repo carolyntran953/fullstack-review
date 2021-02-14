@@ -26,7 +26,9 @@ let save = (repos) => {
 
   // mongoose.connection.collection('repos').createIndex({id: 1}, {unique: true, sparse:true});
 
-  mongoose.connection.collection('repos').insert(repo);
+  // mongoose.connection.collection('repos').insert(repo);
+
+  Repo.create(repos);
 }
 
 module.exports.save = save;

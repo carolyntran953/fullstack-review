@@ -20,11 +20,14 @@ class App extends React.Component {
       method: 'POST',
       data: { user: term },
       success: (result) => {
+        let updatedRepos = [...this.state.repos, ...result].sort((a, b) => b.stargazers_count - a.stargazers_count);
         this.setState({
-          // repos: result
-          repos: [...this.state.repos, ...result]
+          repos: updatedRepos.map(repo => Object.assign(repo, { rank: updatedRepos.indexOf(repo) + 1 }))
         });
-        console.log('search success');
+        this.state.repos.forEach((repo, i) => {
+          repo.rank = i + 1;
+        });
+        console.log(this.state.repos);
       },
       error: (err) => {
         console.log('search error: ' + err);
