@@ -26,16 +26,6 @@ app.post('/repos', function (req, res) {
   .catch((err) => {
     console.log('server save repos: ', err);
   });
-  // getReposByUsername(req.body.user)
-  // .then((repos) => {
-  //   repos.forEach(repo => {
-  //     save(repo)
-  //   });
-  //   res.send(repos);
-  // })
-  // .catch((err) => {
-  //   console.log('save error in server: ', err);
-  // });
 });
 
 app.get('/repos', function (req, res) {
