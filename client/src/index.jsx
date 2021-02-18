@@ -9,7 +9,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      repos: []
+      repos: [],
+      count: 0
     }
     this.getRepos = this.getRepos.bind(this);
   }
@@ -18,14 +19,15 @@ class App extends React.Component {
   getRepos() {
     axios.get('/repos')
       .then((response) => {
-        // console.log(response);
+        // console.log(response.data);
         this.setState({
-          repos: response.data
+          repos: response.data.docs,
+          count: response.data.count
         })
-        console.log(this.state.repos);
+        // console.log(this.state.repos);
       })
       .catch((error) => {
-        console.log('componentDidMount: ' + error);
+        console.log('client getRepos: ', error);
       })
   }
 
@@ -41,16 +43,9 @@ class App extends React.Component {
       data: { user: term },
       success: (result) => {
         this.getRepos();
-        // let updatedRepos = [...this.state.repos, ...result].sort((a, b) => b.stargazers_count - a.stargazers_count);
-        // this.setState({
-        //   repos: updatedRepos.map(repo => Object.assign(repo, { rank: updatedRepos.indexOf(repo) + 1 }))
-        // });
-        // this.state.repos.forEach((repo, i) => {
-        //   repo.rank = i + 1;
-        // });
       },
       error: (err) => {
-        console.log('search error: ' + err);
+        console.log('client search post: ', err);
         return;
       }
     });
@@ -60,7 +55,7 @@ class App extends React.Component {
     return (<div>
       <h1>Github Fetcher</h1>
       <Search onSearch={this.search.bind(this)}/>
-      <RepoList repos={this.state.repos}/>
+      <RepoList repos={this.state.repos} count={this.state.count} />
     </div>)
   }
 }

@@ -4,7 +4,7 @@ import Repo from './Repo.jsx';
 const RepoList = (props) => (
   <div>
     <h4> Repo List Component </h4>
-    There are {props.repos.length} repos.
+    There are {props.count} repos.
     <table>
       <thead>
         <tr>
@@ -15,7 +15,6 @@ const RepoList = (props) => (
         </tr>
       </thead>
       <tbody>
-        {/* {props.repos.map(repo => repo.rank <= 25 ? <Repo key={repo.id} repo={repo} /> : null)} */}
         {props.repos.map(repo => <Repo key={repo.id} repo={repo} />)}
       </tbody>
     </table>

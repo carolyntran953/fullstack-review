@@ -29,11 +29,11 @@ let save = (repos) => {
 
   Repo.findOneAndUpdate(filter, repo, options)
   .then((doc) => {
-    console.log(doc);
+    // console.log(doc);
     return doc;
   })
   .catch((err) => {
-    console.log('save: ' + err);
+    console.log('save: ', err);
     return;
   });
 }
