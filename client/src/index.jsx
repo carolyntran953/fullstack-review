@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import RepoList from './components/RepoList.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,6 +12,26 @@ class App extends React.Component {
       repos: []
     }
 
+    this.getRepos = this.getRepos.bind(this);
+  }
+
+
+  getRepos() {
+    axios.get('/repos')
+      .then((response) => {
+        // console.log(response);
+        this.setState({
+          repos: response.data
+        })
+        console.log(this.state.repos);
+      })
+      .catch((error) => {
+        console.log('componentDidMount: ' + error);
+      })
+  }
+
+  componentDidMount() {
+    this.getRepos();
   }
 
   search (term) {
@@ -20,14 +41,14 @@ class App extends React.Component {
       method: 'POST',
       data: { user: term },
       success: (result) => {
-        let updatedRepos = [...this.state.repos, ...result].sort((a, b) => b.stargazers_count - a.stargazers_count);
-        this.setState({
-          repos: updatedRepos.map(repo => Object.assign(repo, { rank: updatedRepos.indexOf(repo) + 1 }))
-        });
-        this.state.repos.forEach((repo, i) => {
-          repo.rank = i + 1;
-        });
-        console.log(this.state.repos);
+        this.getRepos();
+        // let updatedRepos = [...this.state.repos, ...result].sort((a, b) => b.stargazers_count - a.stargazers_count);
+        // this.setState({
+        //   repos: updatedRepos.map(repo => Object.assign(repo, { rank: updatedRepos.indexOf(repo) + 1 }))
+        // });
+        // this.state.repos.forEach((repo, i) => {
+        //   repo.rank = i + 1;
+        // });
       },
       error: (err) => {
         console.log('search error: ' + err);

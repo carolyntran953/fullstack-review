@@ -15,10 +15,8 @@ app.post('/repos', function (req, res) {
   // This route should take the github username provided
   // and get the repo information from the github API, then
   // save the repo information in the database
-  console.log('user: ' + req.body.user);
   getReposByUsername(req.body.user)
   .then((repos) => {
-    // console.log(repos);
     repos.forEach(repo => {
       save(repo)
     });
@@ -26,7 +24,6 @@ app.post('/repos', function (req, res) {
   })
   .catch((err) => {
     console.log('save error in server: ' + err);
-    // res.sendStatus(404);
   });
 });
 
@@ -39,10 +36,9 @@ app.get('/repos', function (req, res) {
     res.send(docs);
   })
   .catch((err) => {
-    console.log('get top repos: ' + err);
+    console.log('get top repos error: ' + err);
+    res.send(err);
   });
-
-  res.end();
 });
 
 let port = 1128;

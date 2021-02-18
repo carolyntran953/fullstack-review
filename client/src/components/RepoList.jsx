@@ -16,7 +16,8 @@ const RepoList = (props) => (
         </tr>
       </thead>
       <tbody>
-        {props.repos.map(repo => repo.rank <= 25 ? <Repo key={repo.id} repo={repo} /> : null)}
+        {/* {props.repos.map(repo => repo.rank <= 25 ? <Repo key={repo.id} repo={repo} /> : null)} */}
+        {props.repos.map(repo => <Repo key={repo.id} repo={repo} />)}
       </tbody>
     </table>
   </div>

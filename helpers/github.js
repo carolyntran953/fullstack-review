@@ -8,7 +8,6 @@ let getReposByUsername = (user) => {
   // The options object has been provided to help you out,
   // but you'll have to fill in the URL
   return new Promise((resolve, reject) => {
-    // console.log('USER: ' + user);
     let options = {
       headers: {
         'User-Agent': 'carolytran953',

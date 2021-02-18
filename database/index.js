@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
-  id: Number,
+  id: { type: Number, unique: true },
   user: String,
   name: String,
   description: String,
@@ -24,11 +24,18 @@ let save = (repos) => {
   repo.url = repos.html_url;
   repo.stars = repos.stargazers_count;
 
-  // mongoose.connection.collection('repos').createIndex({id: 1}, {unique: true, sparse:true});
+  const filter = { id: repos.id };
+  const options = {upsert: true, new: true }
 
-  // mongoose.connection.collection('repos').insert(repo);
-
-  Repo.create(repos);
+  Repo.findOneAndUpdate(filter, repo, options)
+  .then((doc) => {
+    console.log(doc);
+    return doc;
+  })
+  .catch((err) => {
+    console.log('save: ' + err);
+    return;
+  });
 }
 
 module.exports.save = save;
