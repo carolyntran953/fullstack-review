@@ -8,7 +8,6 @@ const RepoList = (props) => (
     <table>
       <thead>
         <tr>
-        <th>RANK</th>
         <th>USER</th>
         <th>REPOSITORY</th>
         <th>DESCRIPTION</th>
