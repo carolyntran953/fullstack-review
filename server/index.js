@@ -18,9 +18,6 @@ app.post('/repos', function (req, res) {
   getReposByUsername(req.body.user)
   .then((repos) => {
     let promises = repos.map(repo => save(repo));
-    promises.push(mongoose.connection.collection('repos').count({}, (err, count) => {
-      return count;
-    }));
     Promise.all(promises).then(values => res.send(values));
   })
   .catch((err) => {
